@@ -1,0 +1,21 @@
+{
+  "name": "zan",
+  "version": "1.0.0",
+  "description": "find what you zaned in zhihu",
+  "main": "zan.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zhihu"
+  ],
+  "author": "lin onetwo",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "node-fetch": "^1.5.3",
+    "superagent": "^2.0.0",
+    "whatwg-fetch": "^1.0.0",
+    "when": "^3.7.7"
+  }
+}
