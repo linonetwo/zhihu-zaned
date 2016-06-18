@@ -139,9 +139,11 @@ const NORMAL_DIV_COUNTS = 20;
 const TIME_WAIT = 500;
 
 
+// 每次抓取下一页的时候都需要用到上一页最后一个帖子的点赞时间
 function getLastUpVotedTime() {
   return Promise.resolve(resultList.slice(-1)[0]['time']);
 }
+
 
 function nextPageLoop(activiterName, xsrf, cookies) {
   return poll(() => { // 开始爬虫循环
@@ -149,12 +151,13 @@ function nextPageLoop(activiterName, xsrf, cookies) {
         .then(lastUpvotedTime => getNextActivityPage(activiterName, lastUpvotedTime, xsrf, cookies))
         .then(result => {
           resultList = resultList.concat(parseDOM(result));
-          console.log(resultList, resultList.length);
           return result.length; // 返回这次抓取到的 div 的数量，当达到底部的时候会少于 NORMAL_DIV_COUNTS
         });
     }, TIME_WAIT, (divCounts) => divCounts <= NORMAL_DIV_COUNTS, false) // 循环等待时间是 TIME_WAIT ms，直到 divCounts 比一般情况下会抓取到的 div 数量少就停下
 }
 
+
+// 爬取用户 activiterName 赞过的内容，最好用一个小号来爬
 function getZanedAnswers(activiterName, userName, password) {
   return getXrsf()
     .then(xsrf =>
@@ -163,12 +166,11 @@ function getZanedAnswers(activiterName, userName, password) {
           getFirstActivityPage(activiterName)
             .then(result => {
               resultList = resultList.concat(parseDOM(result));
-              console.log(resultList, resultList.length);
               return nextPageLoop(activiterName, xsrf, cookies); // 然后就进入循环了
             })
         )
     )
-    .then(() => console.log(resultList))
+    .then(() => resultList)
     .catch(err => console.error(err))
 }
 
