@@ -13,7 +13,10 @@
   "license": "MIT",
   "dependencies": {
     "cheerio": "^0.20.0",
+    "logger-utils": "^1.0.0",
+    "neo4j-driver": "^1.0.2",
     "node-fetch": "^1.5.3",
+    "node-uuid": "^1.4.7",
     "superagent": "^2.0.0",
     "whatwg-fetch": "^1.0.0",
     "when": "^3.7.7"
