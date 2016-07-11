@@ -3,6 +3,7 @@
 
 ## usage
 
+主界面点击按钮刷新
 
 ## TODO
 elasticsearch 保存索引
